@@ -1,55 +1,73 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import SearchBox from './components/SearchBox'
+import Pagination from './components/Pagination'
+import SearchResults from './components/SearchResults'
 
 const clientId = process.env.REACT_APP_CLIENT_ID;
+const apiURL = `https://api.github.com`;
 
 class App extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     const existingToken = sessionStorage.getItem('token');
     const accessToken = (window.location.search.split("=")[0] === "?access_token") ? window.location.search.split("=")[1] : null;
-  
+
     if (!accessToken && !existingToken) {
       window.location.replace(`https://github.com/login/oauth/authorize?scope=user:email,repo&client_id=${clientId}`)
     }
-  
+
     if (accessToken) {
       console.log(`New accessToken: ${accessToken}`);
-  
+
       sessionStorage.setItem("token", accessToken);
       this.state = {
-          token: accessToken
-      }
+        token: accessToken,
+        issues: [],
+        owner: '',
+        repo: '',
+        search: '',
+        page: ''
+      };
     }
-  
+
     if (existingToken) {
       this.state = {
-        token: existingToken
+        token: existingToken,
+        issues: [],
+        owner: 'facebook',
+        repo: 'react',
+        search: '',
+        page: 1
       };
-    }    
+    }
   }
-  
-  
+
+  githubAPI = async () => {
+    let { owner, repo, token, page } = this.state
+    let response = await fetch(`${apiURL}/repos/${owner}/${repo}/issues?access_token=${token}&page=${page}&per_page=20`);
+    let issues = await response.json();
+    this.setState({
+      issues: issues
+    }, () => console.log(this.state.issues))
+  }
+
+  componentDidMount() {
+    this.githubAPI();
+  }
+ 
   render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
+    if (this.state.issues.length > 0)
+      return (
+        <div>
+          <SearchBox />
+          <Pagination />
+          <SearchResults issues={this.state.issues} />
+        </div>
+      );
+      else 
+      return (<h2>Loading...!</h2>)
   }
 }
 

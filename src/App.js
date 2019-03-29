@@ -3,7 +3,13 @@ import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import SearchBox from "./components/tool/SearchBox";
 import Pagination from "./components/pagination/Pagination";
+<<<<<<< HEAD
+// import SearchResults from "./components/page/SearchResults";
+import IssueDetail from "./components/page/IssueDetail";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+=======
 import SearchResults from "./components/page/SearchResults";
+>>>>>>> 732d834ab8eb8f7741bfe75aa21302f3e043fd7c
 
 const clientId = process.env.REACT_APP_CLIENT_ID;
 const apiURL = `https://api.github.com`;
@@ -33,7 +39,11 @@ class App extends Component {
         owner: "",
         repo: "",
         search: "",
+<<<<<<< HEAD
+        page: ""
+=======
         page: 1
+>>>>>>> 732d834ab8eb8f7741bfe75aa21302f3e043fd7c
       };
     }
 
@@ -67,6 +77,11 @@ class App extends Component {
     this.githubAPI();
   }
 
+<<<<<<< HEAD
+  render() {
+    if (this.state.issues.length > 0) return <div />;
+    else return <h2>Loading...!</h2>;
+=======
   handleClick = data => {
     this.setState(
       {
@@ -90,6 +105,7 @@ class App extends Component {
         </div>
       );
     } else return <h2>Loading...!</h2>;
+>>>>>>> 732d834ab8eb8f7741bfe75aa21302f3e043fd7c
   }
 }
 

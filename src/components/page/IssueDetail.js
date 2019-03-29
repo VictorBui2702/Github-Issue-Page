@@ -4,6 +4,7 @@ import "semantic-ui-css/semantic.min.css";
 // import SearchBox from "./components/tool/SearchBox";
 // import Pagination from "./components/pagination/Pagination";
 // import SearchResults from "./components/page/SearchResults";
+const ReactMarkdown = require("react-markdown");
 
 const clientId = process.env.REACT_APP_CLIENT_ID;
 const apiURL = `https://api.github.com`;
@@ -105,7 +106,7 @@ class IssueDetail extends Component {
                 <h2>{this.state.issuesDetail.title}</h2>{" "}
                 <span>{this.state.issuesDetail.created_at}</span>
                 <div class="ui raised segment">
-                  <p>{this.state.issuesDetail.body}</p>
+                  <ReactMarkdown source={this.state.issuesDetail.body} />
                 </div>
               </div>
             </div>

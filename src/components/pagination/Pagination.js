@@ -4,7 +4,7 @@ export default class Pagination extends Component {
   render() {
     return (
       <div>
-        Pagination
+        
       </div>
     )
   }

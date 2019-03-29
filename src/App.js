@@ -56,7 +56,7 @@ class App extends Component {
   componentDidMount() {
     this.githubAPI();
   }
- 
+
   render() {
     if (this.state.issues.length > 0)
       return (
@@ -66,7 +66,7 @@ class App extends Component {
           <SearchResults issues={this.state.issues} />
         </div>
       );
-      else 
+    else
       return (<h2>Loading...!</h2>)
   }
 }

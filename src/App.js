@@ -91,7 +91,7 @@ class App extends Component {
     if (this.state.issues.length > 0) {
       console.log(this.state.issues);
       return (
-        <div>
+        <div className="App">
           <SearchBox />
           <Pagination pageClicked={this.handleClick} />
 

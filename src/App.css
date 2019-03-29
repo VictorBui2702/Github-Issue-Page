@@ -61,6 +61,7 @@ pre {
   height: 20px;
   line-height: 15px;
   padding: .15em 4px;
+  color: black;
 }
 .open.octicon {
   color: #28a745;

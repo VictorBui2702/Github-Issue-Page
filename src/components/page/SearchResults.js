@@ -5,17 +5,11 @@ import Labels from '../issues/Labels'
 import IssueOverview from '../issues/IssueOverview'
 
 export default class SearchResults extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            issues: this.props.issues
-        }
-    }
 
     render() {
         return (
             <Container>
-                {this.state.issues.map((issue, index) =>
+                {this.props.issues.map((issue, index) =>
                     <Row key={index} >
                         <Col sm={8}>
                             <IssueOverview issue={issue} />

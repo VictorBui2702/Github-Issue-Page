@@ -1,11 +1,19 @@
 .App {
-  text-align: center;
+  /* text-align: center; */
+  background: linear-gradient(to right, #5a0205 0%,#040b42 100%);
+  color: antiquewhite;
 }
 
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 40vmin;
   pointer-events: none;
+}
+
+pre {
+  background-color: rgba(7, 0, 0, 0.411);
+  color: rgb(229, 255, 0) !important;
+  border: #ffffff solid 2px;
 }
 
 .App-header {

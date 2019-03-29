@@ -4,7 +4,8 @@ export default class SearchBox extends Component {
     render() {
         return (
             <div>
-                This is search box
+                Searching bar 
+                <input placeholder="moron search?"></input>
             </div>
         )
     }

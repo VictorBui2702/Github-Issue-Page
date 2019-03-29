@@ -60,7 +60,7 @@ class App extends Component {
   render() {
     if (this.state.issues.length > 0)
       return (
-        <div>
+        <div className="App">
           <SearchBox />
           <Pagination />
           <SearchResults issues={this.state.issues} />

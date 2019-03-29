@@ -1,5 +1,5 @@
 {
-  "base": "\t",
+  "base": "sem",
   "paths": {
     "source": {
       "config": "src/theme.config",

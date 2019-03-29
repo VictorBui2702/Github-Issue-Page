@@ -73,7 +73,7 @@ class App extends Component {
         page: data
       },
       () => {
-        this.githubAPI(this.state.page);
+        this.githubAPI();
       }
     );
   };

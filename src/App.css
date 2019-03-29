@@ -54,4 +54,7 @@
   line-height: 15px;
   padding: .15em 4px;
 }
+.open.octicon {
+  color: #28a745;
+}
 

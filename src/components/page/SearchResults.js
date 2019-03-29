@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { Container, Row, Col } from 'reactstrap';
-import Profile from './user/Profile'
-import Labels from './Labels'
-import IssueOverview from './IssueOverview'
+import Profile from '../profile/Profile'
+import Labels from '../issues/Labels'
+import IssueOverview from '../issues/IssueOverview'
 
 export default class SearchResults extends Component {
     constructor(props) {

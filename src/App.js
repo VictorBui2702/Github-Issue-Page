@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import SearchBox from './components/SearchBox'
-import Pagination from './components/Pagination'
-import SearchResults from './components/SearchResults'
+import SearchBox from './components/tool/SearchBox'
+import Pagination from './components/pagination/Pagination'
+import SearchResults from './components/page/SearchResults'
 
 const clientId = process.env.REACT_APP_CLIENT_ID;
 const apiURL = `https://api.github.com`;

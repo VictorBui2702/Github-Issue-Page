@@ -4,7 +4,7 @@ export default class Pagination extends Component {
   render() {
     return (
       <div>
-        This is search box
+        Pagination
       </div>
     )
   }

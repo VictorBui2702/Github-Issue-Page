@@ -4,6 +4,10 @@ import Profile from '../profile/Profile'
 import Labels from '../issues/Labels'
 import IssueOverview from '../issues/IssueOverview'
 
+const ColorLine = ({ color }) => (
+    <hr style={{color: color, backgroundColor: color,height: 3}}/>
+);
+
 export default class SearchResults extends Component {
 
     render() {
@@ -18,9 +22,11 @@ export default class SearchResults extends Component {
                             <Profile profile={issue.user} />
                             <Labels labels={issue.labels} />
                         </Col>
+                        <Col ><ColorLine color="lightpink"/></Col>
                     </Row>
                 )}
             </Container>
+            
         )
     }
 }

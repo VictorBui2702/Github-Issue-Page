@@ -4,7 +4,11 @@ import { Link } from 'react-router-dom'
 
 const ReactMarkdown = require('react-markdown')
 
+
+
 export default class IssueOverview extends Component {
+
+    
     render() {
         let issue = this.props.issue;
         return (

@@ -4,7 +4,13 @@ export default class SearchBox extends Component {
     render() {
         return (
             <div>
-                This is search box
+                Searching bar 
+                <input placeholder="moron owner"
+                // onChange = {(e) => this.props.searchText(e.target.value)}
+                />
+                <input placeholder="repo name"/>
+                
+               
             </div>
         )
     }

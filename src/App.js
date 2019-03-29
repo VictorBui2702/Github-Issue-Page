@@ -49,6 +49,15 @@ class App extends Component {
     }
   }
 
+  onSearch= (text) => {
+    this.setState({
+      // search: text,
+      // i: text.indexOf('/'),
+      owner : text.slice(0, text.indexOf('/')).trim(),
+      repo : text.slice(text.indexOf('/') + 1, text.length).trim(),
+    })
+  }
+
   githubAPI = async () => {
     let { owner, repo, token, page } = this.state;
     let response = await fetch(

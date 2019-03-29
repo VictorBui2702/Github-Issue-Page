@@ -19,7 +19,9 @@ export default class SearchResults extends Component {
     render() {
         return (
             <Container>
-                {this.state.issues.map((issue, index) =>
+                {this.props.issues
+                // .filter( (issue) => issue.title.includes(this.props.searchProp))
+                .map((issue, index) =>
                     <Row key={index} >
                         <Col sm={8}>
                             <IssueOverview issue={issue} />

@@ -28,7 +28,8 @@ class App extends Component {
         owner: '',
         repo: '',
         search: '',
-        page: ''
+        page: '',
+        i: 5
       };
     }
 
@@ -39,9 +40,19 @@ class App extends Component {
         owner: 'facebook',
         repo: 'react',
         search: '',
-        page: 1
+        page: 1,
+        i: 5
       };
     }
+  }
+
+  onSearch= (text) => {
+    this.setState({
+      // search: text,
+      // i: text.indexOf('/'),
+      owner : text.slice(0, text.indexOf('/')).trim(),
+      repo : text.slice(text.indexOf('/') + 1, text.length).trim(),
+    })
   }
 
   githubAPI = async () => {
@@ -61,9 +72,10 @@ class App extends Component {
     if (this.state.issues.length > 0)
       return (
         <div className="App">
-          <SearchBox />
+          <SearchBox> </SearchBox>
+          <button onClick={this.onSearch}>tim tim</button>
           <Pagination />
-          <SearchResults issues={this.state.issues} />
+          <SearchResults issues={this.state.issues} searchProp={this.props.search} />
         </div>
       );
       else 

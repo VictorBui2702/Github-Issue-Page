@@ -1,6 +1,11 @@
 import React, { Component } from "react";
+import moment from "moment";
+
 import "bootstrap/dist/css/bootstrap.min.css";
 import "semantic-ui-css/semantic.min.css";
+import "./IssueDetail.css";
+import ReactModal from "react-modal";
+
 // import SearchBox from "./components/tool/SearchBox";
 // import Pagination from "./components/pagination/Pagination";
 // import SearchResults from "./components/page/SearchResults";
@@ -46,7 +51,8 @@ class IssueDetail extends Component {
         repo: "react",
         search: "",
         userDetail: [],
-        pullRequest: {}
+        pullRequest: {},
+        commentDetail: []
       };
     }
   }
@@ -72,11 +78,38 @@ class IssueDetail extends Component {
     console.log("request", this.state.pullRequest);
   };
 
+  getCommentAPI = async () => {
+    const { params } = await this.props.match;
+    const number = params.number;
+    let { owner, repo, token } = this.state;
+    let response = await fetch(
+      `${apiURL}/repos/${owner}/${repo}/issues/${number}/comments?access_token=${token}`
+    );
+    let issueComment = await response.json();
+    this.setState({
+      commentDetail: issueComment
+    });
+    console.log("cmt", this.state.commentDetail);
+  };
+
+  //https://api.github.com/repos/facebook/react/issues/15211/comments
+
   componentDidMount() {
     this.githubAPI();
+    this.getCommentAPI();
   }
 
   render() {
+    let commentArray = this.state.commentDetail.map(item => {
+      return (
+        <CommentDetail
+          user={item.user}
+          body={item.body}
+          createdAt={item.created_at}
+          id={item.id}
+        />
+      );
+    });
     return (
       <div className="container">
         <h3>View Issues From #{this.state.issuesDetail.number}</h3>
@@ -87,77 +120,146 @@ class IssueDetail extends Component {
                 <img src={this.state.userDetail.avatar_url} alt="logo" />
               </div>
               <div className="content">
-                <p className="header">{this.state.userDetail.login}</p>
+                <p className="header greenHeader">
+                  {this.state.userDetail.login}
+                </p>
                 <div className="meta">
-                  <span className="date">Joined in 2013</span>
+                  <span className="date text-white">Joined in 2013</span>
                 </div>
-                <div className="description">
+                <div className="description text-white">
                   Kristy is an art director living in New York.
                 </div>
               </div>
-              <div className="extra content">
+              <div className="extra content text-white">
                 <p>22 Friends</p>
               </div>
             </div>
           </div>
           <div className="col-9">
-            <div className="row my-3">
-              <div class="ui segment">
-                <h2>{this.state.issuesDetail.title}</h2>{" "}
-                <span>{this.state.issuesDetail.created_at}</span>
-                <div class="ui raised segment">
+            <div className="row mb-4">
+              <div className="ui segment ">
+                <h3 className="border-bottom greenHeader">
+                  #{this.state.issuesDetail.number} -
+                  {this.state.issuesDetail.title}
+                </h3>
+                <span className="time-text">
+                  {moment(this.state.issuesDetail.created_at).format(
+                    " DD - MM - YY  hh:mm:ss A"
+                  )}{" "}
+                  (created
+                  {moment(this.state.issuesDetail.created_at).fromNow()})
+                </span>
+                <div className="ui raised segment text-white">
                   <ReactMarkdown source={this.state.issuesDetail.body} />
                 </div>
               </div>
             </div>
-            <div className="row">
-              <div class="ui minimal comments">
-                <h3 class="ui dividing header">Comments</h3>
-
-                <div class="comment">
-                  <a class="avatar">
-                    <img src="/images/avatar/small/elliot.jpg" />
-                  </a>
-                  <div class="content">
-                    <a class="author">Elliot Fu</a>
-                    <div class="metadata">
-                      <span class="date">Yesterday at 12:30AM</span>
-                    </div>
-                    <div class="text">
-                      <p>
-                        This has been very useful for my research. Thanks as
-                        well!
-                      </p>
-                    </div>
-                    <div class="actions">
-                      <a class="reply">Reply</a>
-                    </div>
-                  </div>
-                  <div class="comments">
-                    <div class="comment">
-                      <a class="avatar">
-                        <img src="/images/avatar/small/jenny.jpg" />
-                      </a>
-                      <div class="content">
-                        <a class="author">Jenny Hess</a>
-                        <div class="metadata">
-                          <span class="date">Just now</span>
-                        </div>
-                        <div class="text">
-                          Elliot you are always so right :)
-                        </div>
-                        <div class="actions">
-                          <a class="reply">Reply</a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+            <div classNameName="row">
+              <div className="ui minimal comments">
+                <h3 className="ui dividing header">Comments</h3>
+                {commentArray}
               </div>
             </div>
           </div>
         </div>
       </div>
+    );
+  }
+}
+
+class CommentDetail extends React.Component {
+  state = { showModal: false };
+
+  handleOpenModal = () => {
+    this.setState({ showModal: true });
+  };
+
+  handleCloseModal = () => {
+    this.setState({ showModal: false });
+  };
+
+  render() {
+    return (
+      <div className="comment ">
+        <div className="row">
+          <div className="col-1">
+            <a className="avatar">
+              <img src={this.props.user.avatar_url} />
+            </a>
+          </div>
+          <div className="col-11">
+            <div className="content">
+              <h5 className="border-bottom greenHeader">
+                {this.props.user.login}
+              </h5>
+
+              <div className="text">
+                <ReactMarkdown source={this.props.body} />
+              </div>
+              <div className="actions">
+                <a className="reply text-white">Reply</a>
+              </div>
+              <div>
+                {" "}
+                <span className="date text-white">
+                  {moment(this.props.createdAt).format(
+                    " DD - MM - YY  hh:mm:ss A"
+                  )}{" "}
+                  (created
+                  {moment(this.props.createdAt).fromNow()})
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div onClick={() => this.handleOpenModal()}>
+          <div class="ui blue labeled submit icon button">
+            <i class="icon edit" /> Reply
+          </div>
+        </div>
+        <ReplyModal
+          showModal={this.state.showModal}
+          handleCloseModal={this.handleCloseModal}
+        />
+      </div>
+    );
+  }
+}
+
+class ReplyModal extends React.Component {
+  render() {
+    return (
+      <ReactModal
+        isOpen={this.props.showModal}
+        contentLabel="Inline Styles Modal Example"
+        onRequestClose={this.props.handleCloseModal}
+        style={{
+          overlay: {
+            position: "fixed",
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundColor: "rgba(0, 0, 0, 0.3)"
+          },
+          content: {
+            position: "absolute",
+            top: "100px",
+            left: "100px",
+            right: "100px",
+            bottom: "px",
+            border: "1px solid #ccc",
+            background: "#fff",
+            overflow: "hidden",
+            WebkitOverflowScrolling: "touch",
+            borderRadius: "3px",
+            outline: "none",
+            padding: "0",
+            backgroundColor: "black"
+          }
+        }}
+      />
     );
   }
 }

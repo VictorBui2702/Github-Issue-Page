@@ -27,11 +27,11 @@
 }
 .ui.segment {
   background-color: black;
-  border-color: lightpink;
+  box-shadow: 0 2px 4px 0 lightpink, 0 2px 10px 0 lightpink !important;
 }
 .ui.raised.segment,
 .ui.raised.segments {
-  box-shadow: 0 2px 4px 0 lightpink, 0 2px 10px 0 lightpink !important;
+  box-shadow: none !important;
 }
 .time-text {
   color: antiquewhite;
@@ -61,4 +61,8 @@
 .ui.blue.button,
 .ui.blue.buttons .button {
   margin-top: 0 !important;
+}
+
+.text-antiquewhite {
+  color: antiquewhite;
 }

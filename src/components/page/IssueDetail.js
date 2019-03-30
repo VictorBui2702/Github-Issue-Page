@@ -124,14 +124,19 @@ class IssueDetail extends Component {
                   {this.state.userDetail.login}
                 </p>
                 <div className="meta">
-                  <span className="date text-white">Joined in 2013</span>
+                  <span className="text-white">
+                    Id: {this.state.userDetail.id}
+                  </span>
                 </div>
                 <div className="description text-white">
-                  Kristy is an art director living in New York.
+                  Site :{" "}
+                  <a href={this.state.userDetail.html_url}>
+                    {this.state.userDetail.html_url}
+                  </a>
                 </div>
               </div>
               <div className="extra content text-white">
-                <p>22 Friends</p>
+                <p>Type: {this.state.userDetail.type}</p>
               </div>
             </div>
           </div>
@@ -142,14 +147,14 @@ class IssueDetail extends Component {
                   #{this.state.issuesDetail.number} -
                   {this.state.issuesDetail.title}
                 </h3>
-                <span className="time-text">
+                <span className="time-text font-weight-bold">
                   {moment(this.state.issuesDetail.created_at).format(
                     " DD - MM - YY  hh:mm:ss A"
                   )}{" "}
                   (created
                   {moment(this.state.issuesDetail.created_at).fromNow()})
                 </span>
-                <div className="ui raised segment text-white">
+                <div className="ui raised segment text-white mt-3">
                   <ReactMarkdown source={this.state.issuesDetail.body} />
                 </div>
               </div>
@@ -192,16 +197,9 @@ class CommentDetail extends React.Component {
               <h5 className="border-bottom greenHeader">
                 {this.props.user.login}
               </h5>
-
-              <div className="text">
-                <ReactMarkdown source={this.props.body} />
-              </div>
-              <div className="actions">
-                <a className="reply text-white">Reply</a>
-              </div>
               <div>
                 {" "}
-                <span className="date text-white">
+                <span className="date text-antiquewhite font-weight-bold">
                   {moment(this.props.createdAt).format(
                     " DD - MM - YY  hh:mm:ss A"
                   )}{" "}
@@ -209,13 +207,16 @@ class CommentDetail extends React.Component {
                   {moment(this.props.createdAt).fromNow()})
                 </span>
               </div>
+              <div className="text mt-3">
+                <ReactMarkdown source={this.props.body} />
+              </div>
             </div>
           </div>
         </div>
 
-        <div onClick={() => this.handleOpenModal()}>
-          <div class="ui blue labeled submit icon button">
-            <i class="icon edit" /> Reply
+        <div className="text-right" onClick={() => this.handleOpenModal()}>
+          <div className="ui blue labeled submit icon button ">
+            <i className="icon edit" /> Reply
           </div>
         </div>
         <ReplyModal

@@ -43,17 +43,23 @@ class App extends Component {
         issues: [],
         owner: "facebook",
         repo: "react",
-        search: "facebook/react",
+        search: "",
         page: 1
       };
     }
   }
 
+<<<<<<< HEAD
   searchIssues = e => {
     this.setState({ search: e.target.value }, () =>
       console.log(this.state.search)
     );
   };
+=======
+  searchIssues = (e) => {
+    this.setState({ search: e.target.value.toLowerCase() }, () => console.log(this.state.search));
+  }
+>>>>>>> 2ee288a3e0eb4fd912f15b4393f525be1a75cefa
 
   submitSearchIssues = event => {
     event.preventDefault();
@@ -93,6 +99,7 @@ class App extends Component {
     if (this.state.issues.length > 0) {
       return (
         <div className="App">
+<<<<<<< HEAD
           <SearchBox
             submitSearchIssues={this.submitSearchIssues}
             searchIssues={this.searchIssues}
@@ -100,6 +107,15 @@ class App extends Component {
           />
           <Pagination pageClicked={this.handlePageClick} />
           <SearchResults issues={this.state.issues} />
+=======
+          <div className="navBarr fixed-top">
+            <SearchBox submitSearchIssues={this.submitSearchIssues} searchIssues={this.searchIssues} search={this.state.search} />
+            <Pagination pageClicked={this.handlePageClick} />
+          </div>
+          <div className="searchBody">
+            <SearchResults issues={this.state.issues} owner={this.state.owner} repo={this.state.repo}/>
+          </div>
+>>>>>>> 2ee288a3e0eb4fd912f15b4393f525be1a75cefa
         </div>
       );
     } else return <h2>Loading...!</h2>;

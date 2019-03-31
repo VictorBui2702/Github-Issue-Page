@@ -15,7 +15,7 @@ export default class SearchResults extends Component {
                 {this.props.issues.map((issue, index) =>
                     <Row key={index} >
                         <Col sm={8}>
-                            <IssueOverview issue={issue} />
+                            <IssueOverview issue={issue} owner={this.props.owner} repo={this.props.repo}/>
                         </Col>
                         <Col sm={4} className="issues-page">
                             <Profile profile={issue.user} />

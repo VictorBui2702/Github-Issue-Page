@@ -10,6 +10,16 @@
   pointer-events: none;
 }
 
+.navBarr {
+  background: linear-gradient(to right, rgba(58,2,4,0.8) 0%, rgba(0,5,46,0.8) 100%) !important;
+ 
+ 
+}
+
+.searchBody{
+  padding-top: 90px;
+}
+
 .issueTitle {
   color: antiquewhite;
   text-decoration: none !important;
@@ -17,6 +27,12 @@
 
 .issueTitle:hover {
   color: rgb(71, 206, 206);
+}
+
+.page-link {
+background: linear-gradient(to right, rgba(58,2,4,0.8) 0%, rgba(0,5,46,0.8) 100%) !important;
+color: rgb(71, 206, 206) !important;
+border: 1px solid rgba(250, 235, 215,1) !important;
 }
 
 pre {
@@ -35,6 +51,7 @@ pre {
   font-size: calc(10px + 2vmin);
   color: white;
 }
+
 
 .App-link {
   color: #61dafb;

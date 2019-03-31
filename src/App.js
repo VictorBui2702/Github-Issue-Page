@@ -42,28 +42,28 @@ class App extends Component {
         token: existingToken,
         issues: [],
         owner: "facebook",
-        repo: "",
+        repo: "react",
         search: "",
         page: 1
       };
     }
   }
 
-searchRepo(e) {
-  this.setState({value: e.target.value});
-}
+  searchRepo(e) {
+    this.setState({ value: e.target.value });
+  }
 
-submitSearch() {
-  this.setState({
-    repo: this.state.value
-  })
-  this.githubAPI()
-}
+  submitSearch() {
+    this.setState({
+      repo: this.state.value
+    })
+    this.githubAPI()
+  }
 
   githubAPI = async () => {
     let { owner, repo, token, page } = this.state;
     let response = await fetch(
-      `${apiURL}/repos/${owner}${repo}/issues?access_token=${token}&page=${page}&per_page=20`
+      `${apiURL}/repos/${owner}/${repo}/issues?access_token=${token}&page=${page}&per_page=20`
     );
     let issues = await response.json();
     this.setState(
@@ -95,12 +95,9 @@ submitSearch() {
       console.log(this.state.issues);
       return (
         <div className="App">
-          
-          <input placeholder="search for repo" value={this.state.repo} onChange={this.state.searchRepo}/>
-          <input type="submit" value="search" onSubmit={this.submitSearch}/>
 
-
-          
+          <input placeholder="search for repo" value={this.state.repo} onChange={this.state.searchRepo} />
+          <input type="submit" value="search" onSubmit={this.submitSearch} />
           <Pagination pageClicked={this.handleClick} />
           <SearchResults issues={this.state.issues} />
         </div>

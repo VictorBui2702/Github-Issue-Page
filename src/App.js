@@ -43,7 +43,7 @@ class App extends Component {
         issues: [],
         owner: "facebook",
         repo: "react",
-        search: "",
+        search: "facebook/react",
         page: 1
       };
     }

@@ -77,9 +77,22 @@ class App extends Component {
     );
   };
 
-  componentDidMount() {
-    this.githubAPI();
-  }
+  handleRepoInput = e => {
+    this.setState({ searchRepo: e.target.value }, () => {
+      console.log(this.state.searchRepo);
+    });
+  };
+
+  handleSubmitSearch = () => {
+    this.setState(
+      {
+        repo: this.state.searchRepo
+      },
+      () => {
+        this.githubAPI();
+      }
+    );
+  };
 
   handlePageClick = data => {
     this.setState({ page: data }, () => this.githubAPI());

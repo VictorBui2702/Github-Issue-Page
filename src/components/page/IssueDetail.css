@@ -1,4 +1,3 @@
-
 .ui.header,
 .ui.comments .comment .author,
 .ui.comments .comment .author,
@@ -28,6 +27,7 @@
   background-color: black;
   box-shadow: 0 0px 0px 0 lightpink, 0 0px 20px 0 lightpink !important;
   border-radius: 10px;
+  width: 100% !important;
 }
 .ui.raised.segment,
 .ui.raised.segments {
@@ -39,6 +39,7 @@
 
 .border-bottom {
   border-color: lightpink !important;
+  width: 100% !important;
 }
 
 .input-style {
@@ -65,4 +66,13 @@
 
 .text-antiquewhite {
   color: antiquewhite;
+}
+.comment-box {
+  background-color: transparent !important;
+
+  border: 1px solid !important;
+  font-weight: 200;
+  color: lightpink !important;
+
+  width: 100% !important;
 }

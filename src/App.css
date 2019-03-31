@@ -1,6 +1,6 @@
 .App {
   /* text-align: center; */
-  background: linear-gradient(to left, #1d0102 0%,#000000 100%);
+  background: linear-gradient(to left, #1d0102 0%, #000000 100%);
   color: antiquewhite;
 }
 
@@ -11,28 +11,30 @@
 }
 
 .navBarr {
-  background: linear-gradient(to right, rgba(58,2,4,0.8) 0%, rgba(0,5,46,0.8) 100%) !important;
- 
- 
+  background: rgba(77, 75, 75, 0.329);
 }
 
-.searchBody{
+.searchBody {
   padding-top: 90px;
 }
 
 .issueTitle {
-  color: antiquewhite;
+  color: rgb(71, 206, 206);
   text-decoration: none !important;
 }
 
 .issueTitle:hover {
-  color: rgb(71, 206, 206);
+  color: antiquewhite;
 }
 
 .page-link {
-background: linear-gradient(to right, rgba(58,2,4,0.8) 0%, rgba(0,5,46,0.8) 100%) !important;
-color: rgb(71, 206, 206) !important;
-border: 1px solid rgba(250, 235, 215,1) !important;
+  background: linear-gradient(
+    to right,
+    rgba(58, 2, 4, 0.8) 0%,
+    rgba(0, 5, 46, 0.8) 100%
+  ) !important;
+  color: rgb(241, 245, 245) !important;
+  border: 1px solid rgba(250, 235, 215, 1) !important;
 }
 
 pre {
@@ -51,7 +53,6 @@ pre {
   font-size: calc(10px + 2vmin);
   color: white;
 }
-
 
 .App-link {
   color: #61dafb;
@@ -81,15 +82,38 @@ pre {
 
 .label span {
   border-radius: 2px;
-  box-shadow: inset 0 -1px 0 rgba(27, 31, 35, .12);
+  box-shadow: inset 0 -1px 0 rgba(27, 31, 35, 0.12);
   font-size: 12px;
   font-weight: 600;
   height: 20px;
   line-height: 15px;
-  padding: .15em 4px;
+  padding: 0.15em 4px;
   color: black;
 }
 .open.octicon {
   color: #28a745;
 }
 
+.fixed-top {
+  position: fixed;
+  top: 20px !important;
+}
+.searchbox-style {
+  background-color: transparent !important;
+  border: none !important;
+  border-bottom: 2px solid white !important;
+  font-weight: 200;
+  color: black;
+  padding-left: 0;
+  width: 250px !important;
+}
+.btn-submit-style {
+  margin-left: 20px !important;
+
+  color: white;
+  background: linear-gradient(
+    to right,
+    rgba(58, 2, 4, 0.8) 0%,
+    rgba(0, 5, 46, 0.8) 100%
+  ) !important;
+}

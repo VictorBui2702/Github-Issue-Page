@@ -74,10 +74,14 @@ class App extends Component {
   };
 
   handleSubmitSearch = () => {
-    this.setState({
-      repo: this.state.searchRepo
-    });
-    this.githubAPI();
+    this.setState(
+      {
+        repo: this.state.searchRepo
+      },
+      () => {
+        this.githubAPI();
+      }
+    );
   };
 
   handleClick = data => {

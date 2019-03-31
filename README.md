@@ -21,7 +21,7 @@ This code was reviewed by @username and @otherusername.
 ## Required User Stories:
 
 - [x] The user can enter a repository in a search bar, click "search", and see the associated issues. The repository should be of the format owner/repo-name, e.g. facebook/react.
-- [x] If the repository does not exist, the user should see a proper error message.
+- [] If the repository does not exist, the user should see a proper error message.
 The user should be able to see the following information for each issue:
 
 - [x] Issue Title

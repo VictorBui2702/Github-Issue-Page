@@ -3,7 +3,7 @@
 - Created with passion by `theParadoxCrew` == `J` + `AHADATAMT` `VictorBui2707` `cloudstar91`
 > In the middle of chaos, we found paradox. In the middle of paradoxes, we found each other lol
 
-- View online at: `coming soon`
+- View online at: https://github-issue-page.netlify.com 
 
 
 

@@ -42,28 +42,21 @@ class App extends Component {
         token: existingToken,
         issues: [],
         owner: "facebook",
-        repo: "",
+        repo: "react",
+        searchOwner: "",
+        searchRepo: "",
         search: "",
         page: 1
       };
     }
   }
-
-searchRepo(e) {
-  this.setState({value: e.target.value});
-}
-
-submitSearch() {
-  this.setState({
-    repo: this.state.value
-  })
-  this.githubAPI()
-}
-
+  componentDidMount() {
+    this.githubAPI();
+  }
   githubAPI = async () => {
     let { owner, repo, token, page } = this.state;
     let response = await fetch(
-      `${apiURL}/repos/${owner}${repo}/issues?access_token=${token}&page=${page}&per_page=20`
+      `${apiURL}/repos/${owner}/${repo}/issues?access_token=${token}&page=${page}&per_page=20`
     );
     let issues = await response.json();
     this.setState(
@@ -74,9 +67,22 @@ submitSearch() {
     );
   };
 
-  componentDidMount() {
-    this.githubAPI();
-  }
+  handleRepoInput = e => {
+    this.setState({ searchRepo: e.target.value }, () => {
+      console.log(this.state.searchRepo);
+    });
+  };
+
+  handleSubmitSearch = () => {
+    this.setState(
+      {
+        repo: this.state.searchRepo
+      },
+      () => {
+        this.githubAPI();
+      }
+    );
+  };
 
   handleClick = data => {
     this.setState(
@@ -90,17 +96,18 @@ submitSearch() {
   };
 
   render() {
-
+    console.log("a", this.state.repo);
     if (this.state.issues.length > 0) {
       console.log(this.state.issues);
       return (
         <div className="App">
-          
-          <input placeholder="search for repo" value={this.state.repo} onChange={this.state.searchRepo}/>
-          <input type="submit" value="search" onSubmit={this.submitSearch}/>
+          <input
+            type="text"
+            value={this.state.searchRepo}
+            onChange={this.handleRepoInput}
+          />
+          <button onClick={this.handleSubmitSearch}>Submit</button>
 
-
-          
           <Pagination pageClicked={this.handleClick} />
           <SearchResults issues={this.state.issues} />
         </div>

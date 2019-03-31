@@ -49,19 +49,23 @@ class App extends Component {
     }
   }
 
-  searchIssues = (e) => {
-    this.setState({ search: e.target.value }, () => console.log(this.state.search));
-  }
+  searchIssues = e => {
+    this.setState({ search: e.target.value }, () =>
+      console.log(this.state.search)
+    );
+  };
 
-  submitSearchIssues = (event) => {
+  submitSearchIssues = event => {
     event.preventDefault();
     let searchArr = this.state.search.split("/");
-    this.setState({
-      repo: searchArr[1],
-      owner: searchArr[0],
-    }, () => this.githubAPI())
-
-  }
+    this.setState(
+      {
+        repo: searchArr[1],
+        owner: searchArr[0]
+      },
+      () => this.githubAPI()
+    );
+  };
 
   githubAPI = async () => {
     let { owner, repo, token, page } = this.state;
@@ -77,24 +81,9 @@ class App extends Component {
     );
   };
 
-  handleRepoInput = e => {
-    this.setState({ searchRepo: e.target.value }, () => {
-      console.log(this.state.searchRepo);
-    });
-  };
   componentDidMount() {
     this.githubAPI();
   }
-  handleSubmitSearch = () => {
-    this.setState(
-      {
-        repo: this.state.searchRepo
-      },
-      () => {
-        this.githubAPI();
-      }
-    );
-  };
 
   handlePageClick = data => {
     this.setState({ page: data }, () => this.githubAPI());
@@ -104,7 +93,11 @@ class App extends Component {
     if (this.state.issues.length > 0) {
       return (
         <div className="App">
-          <SearchBox submitSearchIssues={this.submitSearchIssues} searchIssues={this.searchIssues} search={this.state.search} />
+          <SearchBox
+            submitSearchIssues={this.submitSearchIssues}
+            searchIssues={this.searchIssues}
+            search={this.state.search}
+          />
           <Pagination pageClicked={this.handlePageClick} />
           <SearchResults issues={this.state.issues} />
         </div>

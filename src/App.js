@@ -112,7 +112,21 @@ class App extends Component {
           </div>
         </div>
       );
-    } else return <h2>Loading...!</h2>;
+    } else
+      return (
+        <div className="justify-content-center d-flex align-items-center">
+          <div class="spinner-border text-primary" role="status" />
+          <div class="spinner-border text-secondary" role="status" />
+          <div class="spinner-border text-success" role="status" />
+          <div class="spinner-border text-danger" role="status" />
+          <div class="spinner-border text-warning" role="status" />
+          <div class="spinner-border text-info" role="status" />
+          <div class="spinner-border text-light" role="status" />
+          <div class="spinner-border text-dark" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+        </div>
+      );
   }
 }
 

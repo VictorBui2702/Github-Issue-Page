@@ -106,7 +106,7 @@ class App extends Component {
         <div className="App">
           <SearchBox submitSearchIssues={this.submitSearchIssues} searchIssues={this.searchIssues} search={this.state.search} />
           <Pagination pageClicked={this.handlePageClick} />
-          <SearchResults issues={this.state.issues} />
+          <SearchResults issues={this.state.issues} owner={this.state.owner} repo={this.state.repo}/>
         </div>
       );
     } else return <h2>Loading...!</h2>;

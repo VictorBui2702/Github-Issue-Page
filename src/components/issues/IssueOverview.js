@@ -11,7 +11,7 @@ export default class IssueOverview extends Component {
     console.log(issue)
     return (
       <div>
-        <a  href={"/issues/" + issue.number}>
+        <a  href={`${this.props.owner}/${this.props.repo}/issues/` + issue.number}>
           <h2 className="issueTitle">{issue.title}</h2>{" "}
         </a>
 

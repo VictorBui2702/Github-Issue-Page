@@ -263,20 +263,18 @@ class CommentModal extends React.Component {
   render() {
     return (
       <div className="container">
-        <form>
-          <div className="my-3">
-            <input
-              className="comment-box"
-              type="text"
-              onChange={this.commentOnchange}
-            />
+        <div className="my-3">
+          <input
+            className="comment-box"
+            type="text"
+            onChange={this.commentOnchange}
+          />
+        </div>
+        <div className="text-right" onClick={this.handleSubmitComment}>
+          <div className="ui blue labeled submit icon button ">
+            <i className="icon edit" /> Reply
           </div>
-          <div className="text-right" onClick={this.handleSubmitComment}>
-            <div className="ui blue labeled submit icon button ">
-              <i className="icon edit" /> Reply
-            </div>
-          </div>
-        </form>
+        </div>
       </div>
     );
   }

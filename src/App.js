@@ -49,15 +49,18 @@ class App extends Component {
     }
   }
 
-  searchRepo(e) {
-    this.setState({ value: e.target.value });
+  searchIssues = (e) => {
+    this.setState({ search: e.target.value }, () => console.log(this.state.search));
   }
 
-  submitSearch() {
+  submitSearchIssues = (event) => {
+    event.preventDefault();
+    let searchArr = this.state.search.split("/");
     this.setState({
-      repo: this.state.value
-    })
-    this.githubAPI()
+      repo: searchArr[1],
+      owner: searchArr[0],
+    }, () => this.githubAPI())
+
   }
 
   githubAPI = async () => {
@@ -78,27 +81,16 @@ class App extends Component {
     this.githubAPI();
   }
 
-  handleClick = data => {
-    this.setState(
-      {
-        page: data
-      },
-      () => {
-        this.githubAPI();
-      }
-    );
+  handlePageClick = data => {
+    this.setState({ page: data }, () => this.githubAPI());
   };
 
   render() {
-
     if (this.state.issues.length > 0) {
-      console.log(this.state.issues);
       return (
         <div className="App">
-
-          <input placeholder="search for repo" value={this.state.repo} onChange={this.state.searchRepo} />
-          <input type="submit" value="search" onSubmit={this.submitSearch} />
-          <Pagination pageClicked={this.handleClick} />
+          <SearchBox submitSearchIssues={this.submitSearchIssues} searchIssues={this.searchIssues} search={this.state.search} />
+          <Pagination pageClicked={this.handlePageClick} />
           <SearchResults issues={this.state.issues} />
         </div>
       );

@@ -49,19 +49,29 @@ class App extends Component {
     }
   }
 
+<<<<<<< HEAD
+  searchIssues = e => {
+    this.setState({ search: e.target.value }, () =>
+      console.log(this.state.search)
+    );
+  };
+=======
   searchIssues = (e) => {
     this.setState({ search: e.target.value.toLowerCase() }, () => console.log(this.state.search));
   }
+>>>>>>> 2ee288a3e0eb4fd912f15b4393f525be1a75cefa
 
-  submitSearchIssues = (event) => {
+  submitSearchIssues = event => {
     event.preventDefault();
     let searchArr = this.state.search.split("/");
-    this.setState({
-      repo: searchArr[1],
-      owner: searchArr[0],
-    }, () => this.githubAPI())
-
-  }
+    this.setState(
+      {
+        repo: searchArr[1],
+        owner: searchArr[0]
+      },
+      () => this.githubAPI()
+    );
+  };
 
   githubAPI = async () => {
     let { owner, repo, token, page } = this.state;
@@ -77,24 +87,9 @@ class App extends Component {
     );
   };
 
-  handleRepoInput = e => {
-    this.setState({ searchRepo: e.target.value }, () => {
-      console.log(this.state.searchRepo);
-    });
-  };
   componentDidMount() {
     this.githubAPI();
   }
-  handleSubmitSearch = () => {
-    this.setState(
-      {
-        repo: this.state.searchRepo
-      },
-      () => {
-        this.githubAPI();
-      }
-    );
-  };
 
   handlePageClick = data => {
     this.setState({ page: data }, () => this.githubAPI());
@@ -104,6 +99,15 @@ class App extends Component {
     if (this.state.issues.length > 0) {
       return (
         <div className="App">
+<<<<<<< HEAD
+          <SearchBox
+            submitSearchIssues={this.submitSearchIssues}
+            searchIssues={this.searchIssues}
+            search={this.state.search}
+          />
+          <Pagination pageClicked={this.handlePageClick} />
+          <SearchResults issues={this.state.issues} />
+=======
           <div className="navBarr fixed-top">
             <SearchBox submitSearchIssues={this.submitSearchIssues} searchIssues={this.searchIssues} search={this.state.search} />
             <Pagination pageClicked={this.handlePageClick} />
@@ -111,6 +115,7 @@ class App extends Component {
           <div className="searchBody">
             <SearchResults issues={this.state.issues} owner={this.state.owner} repo={this.state.repo}/>
           </div>
+>>>>>>> 2ee288a3e0eb4fd912f15b4393f525be1a75cefa
         </div>
       );
     } else return <h2>Loading...!</h2>;

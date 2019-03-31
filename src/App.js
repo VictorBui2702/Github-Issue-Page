@@ -82,7 +82,9 @@ class App extends Component {
       console.log(this.state.searchRepo);
     });
   };
-
+  componentDidMount() {
+    this.githubAPI();
+  }
   handleSubmitSearch = () => {
     this.setState(
       {

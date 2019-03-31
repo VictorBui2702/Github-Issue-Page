@@ -100,6 +100,7 @@ class IssueDetail extends Component {
   }
 
   render() {
+ 
     let commentArray = this.state.commentDetail.map(item => {
       return (
         <CommentDetail
@@ -111,8 +112,9 @@ class IssueDetail extends Component {
       );
     });
     return (
+      <div className="App" style={{minHeight:750}}>   
       <div className="container">
-        <h3>View Issues From #{this.state.issuesDetail.number}</h3>
+        <h3 className="pt-4">View Issues From #{this.state.issuesDetail.number}</h3>
         <div className="container d-flex ">
           <div className="col-3">
             <div className="ui card">
@@ -168,6 +170,7 @@ class IssueDetail extends Component {
           </div>
         </div>
       </div>
+  </div>
     );
   }
 }

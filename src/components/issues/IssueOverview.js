@@ -16,7 +16,7 @@ export default class IssueOverview extends Component {
         </a>
 
         <p>
-            #{issue.number} {issue.state}ed{" "}
+            <strong style={{fontStyle:'italic'}}>#{issue.number}</strong> {issue.state}ed{" "}
             <Moment toNow>{issue.created_at}</Moment>{" "}
             by @
             <a href={issue.user.html_url}>{issue.user.login}{" "}</a>

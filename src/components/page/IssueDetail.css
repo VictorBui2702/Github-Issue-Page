@@ -1,6 +1,4 @@
-.container {
-  background-color: black;
-}
+
 .ui.header,
 .ui.comments .comment .author,
 .ui.comments .comment .author,
@@ -17,6 +15,7 @@
 .ui.cards > .card {
   background-color: transparent !important;
   box-shadow: 0 1px 3px 0 lightpink, 0 0 0 1px lightpink;
+  border-radius: 5px;
 }
 .image {
   border: 1px !important;
@@ -27,7 +26,8 @@
 }
 .ui.segment {
   background-color: black;
-  box-shadow: 0 2px 4px 0 lightpink, 0 2px 10px 0 lightpink !important;
+  box-shadow: 0 0px 0px 0 lightpink, 0 0px 20px 0 lightpink !important;
+  border-radius: 10px;
 }
 .ui.raised.segment,
 .ui.raised.segments {

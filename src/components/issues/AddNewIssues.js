@@ -30,6 +30,11 @@ export default class AddNewIssues extends Component {
     }
 
     handleSubmitNewIssues = async () => {
+
+        if(this.state.issues.title === "") {
+            alert('Your issues title cannot be blank');
+            return false;
+        }
         let { token, owner, repo } = this.props
         let data = this.state.issues;
         const url = `${apiURL}/repos/${owner}/${repo}/issues?access_token=${token}`;

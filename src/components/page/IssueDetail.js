@@ -234,7 +234,7 @@ class CommentModal extends React.Component {
 
   handleSubmitComment = async () => {
     if (this.state.commentValue == '') {
-      alert('Your comment cannot be blank.');
+      alert('Your comment cannot be blank!');
       return false;
     }
 

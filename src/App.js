@@ -49,17 +49,11 @@ class App extends Component {
     }
   }
 
-<<<<<<< HEAD
   searchIssues = e => {
-    this.setState({ search: e.target.value }, () =>
+    this.setState({ search: e.target.value.toLowerCase() }, () =>
       console.log(this.state.search)
     );
   };
-=======
-  searchIssues = (e) => {
-    this.setState({ search: e.target.value.toLowerCase() }, () => console.log(this.state.search));
-  }
->>>>>>> 2ee288a3e0eb4fd912f15b4393f525be1a75cefa
 
   submitSearchIssues = event => {
     event.preventDefault();
@@ -99,23 +93,23 @@ class App extends Component {
     if (this.state.issues.length > 0) {
       return (
         <div className="App">
-<<<<<<< HEAD
-          <SearchBox
-            submitSearchIssues={this.submitSearchIssues}
-            searchIssues={this.searchIssues}
-            search={this.state.search}
-          />
-          <Pagination pageClicked={this.handlePageClick} />
-          <SearchResults issues={this.state.issues} />
-=======
-          <div className="navBarr fixed-top">
-            <SearchBox submitSearchIssues={this.submitSearchIssues} searchIssues={this.searchIssues} search={this.state.search} />
-            <Pagination pageClicked={this.handlePageClick} />
+          <div className="navBarr fixed-top mb-5">
+            <div className="position-nav">
+              <Pagination pageClicked={this.handlePageClick} />
+              <SearchBox
+                submitSearchIssues={this.submitSearchIssues}
+                searchIssues={this.searchIssues}
+                search={this.state.search}
+              />
+            </div>
           </div>
           <div className="searchBody">
-            <SearchResults issues={this.state.issues} owner={this.state.owner} repo={this.state.repo}/>
+            <SearchResults
+              issues={this.state.issues}
+              owner={this.state.owner}
+              repo={this.state.repo}
+            />
           </div>
->>>>>>> 2ee288a3e0eb4fd912f15b4393f525be1a75cefa
         </div>
       );
     } else return <h2>Loading...!</h2>;

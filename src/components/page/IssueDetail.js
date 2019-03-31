@@ -36,8 +36,6 @@ class IssueDetail extends Component {
       this.state = {
         token: accessToken,
         issues: [],
-        owner: "",
-        repo: "",
         search: "",
         page: ""
       };
@@ -47,8 +45,6 @@ class IssueDetail extends Component {
       this.state = {
         token: existingToken,
         issuesDetail: {},
-        owner: "facebook",
-        repo: "react",
         search: "",
         userDetail: [],
         pullRequest: {},
@@ -60,8 +56,11 @@ class IssueDetail extends Component {
   githubAPI = async () => {
     console.log("aa", this.props);
     const { params } = await this.props.match;
+    console.log(params);
+    const repo = params.repo;
+    const owner = params.owner;
     const number = params.number;
-    let { owner, repo, token } = this.state;
+    let token = this.state.token;
     let response = await fetch(
       `${apiURL}/repos/${owner}/${repo}/issues/${number}?access_token=${token}`
     );
@@ -81,7 +80,9 @@ class IssueDetail extends Component {
   getCommentAPI = async () => {
     const { params } = await this.props.match;
     const number = params.number;
-    let { owner, repo, token } = this.state;
+    let { token } = this.state;
+    const repo = params.repo;
+    const owner = params.owner;
     let response = await fetch(
       `${apiURL}/repos/${owner}/${repo}/issues/${number}/comments?access_token=${token}`
     );
@@ -161,12 +162,13 @@ class IssueDetail extends Component {
                 </div>
               </div>
             </div>
-            <div classNameName="row">
+            <div className="row">
               <div className="ui minimal comments">
                 <h3 className="ui dividing header">Comments</h3>
                 {commentArray}
               </div>
             </div>
+            <CommentModal params={this.props.match} token={this.state.token} getCommentAPI={this.getCommentAPI} />
           </div>
         </div>
       </div>
@@ -216,54 +218,56 @@ class CommentDetail extends React.Component {
             </div>
           </div>
         </div>
-
-        <div className="text-right" onClick={() => this.handleOpenModal()}>
-          <div className="ui blue labeled submit icon button ">
-            <i className="icon edit" /> Reply
-          </div>
-        </div>
-        <ReplyModal
-          showModal={this.state.showModal}
-          handleCloseModal={this.handleCloseModal}
-        />
       </div>
     );
   }
 }
 
-class ReplyModal extends React.Component {
+class CommentModal extends React.Component {
+  state = {
+    commentValue: ''
+  }
+  commentOnchange = e => {
+    this.setState({
+      commentValue: e.target.value
+    })
+  }
+
+  handleSubmitComment = async () => {
+    if (this.state.commentValue == '') {
+      alert('Your comment cannot be blank.');
+      return false;
+    }
+
+    let data = { "body": this.state.commentValue };
+    const { params } = await this.props.params;
+    const number = params.number;
+    let token = this.props.token;
+    const repo = params.repo;
+    const owner = params.owner;
+    const url = `${apiURL}/repos/${owner}/${repo}/issues/${number}/comments?access_token=${token}`;
+    const response = await fetch(url,
+      {
+        method: 'POST',
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: JSON.stringify(data),
+      }
+    );
+    if (response.status === 201)
+      this.props.getCommentAPI();
+  }
   render() {
     return (
-      <ReactModal
-        isOpen={this.props.showModal}
-        contentLabel="Inline Styles Modal Example"
-        onRequestClose={this.props.handleCloseModal}
-        style={{
-          overlay: {
-            position: "fixed",
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            backgroundColor: "rgba(0, 0, 0, 0.3)"
-          },
-          content: {
-            position: "absolute",
-            top: "100px",
-            left: "100px",
-            right: "100px",
-            bottom: "px",
-            border: "1px solid #ccc",
-            background: "#fff",
-            overflow: "hidden",
-            WebkitOverflowScrolling: "touch",
-            borderRadius: "3px",
-            outline: "none",
-            padding: "0",
-            backgroundColor: "black"
-          }
-        }}
-      />
+      <form>
+        <input type="text" onChange={this.commentOnchange}></input>
+        <div className="text-right" onClick={this.handleSubmitComment}>
+          <div className="ui blue labeled submit icon button ">
+            <i className="icon edit" /> Reply
+          </div>
+        </div>
+      </form>
     );
   }
 }

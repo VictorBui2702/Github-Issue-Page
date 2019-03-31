@@ -13,7 +13,7 @@ function MainApp() {
     <Router>
       <div>
         <Route exact path="/" component={App} />
-        <Route path={`/issues/:number`} component={IssueDetail} />
+        <Route path={`/:owner/:repo/issues/:number`} component={IssueDetail} />
       </div>
     </Router>
   );

@@ -109,9 +109,8 @@ class App extends Component {
             <Pagination pageClicked={this.handlePageClick} />
           </div>
           <div className="searchBody">
-            <SearchResults issues={this.state.issues} />
+            <SearchResults issues={this.state.issues} owner={this.state.owner} repo={this.state.repo}/>
           </div>
-          
         </div>
       );
     } else return <h2>Loading...!</h2>;

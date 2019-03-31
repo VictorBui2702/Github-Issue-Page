@@ -4,6 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import SearchBox from "./components/tool/SearchBox";
 import Pagination from "./components/pagination/Pagination";
 import SearchResults from "./components/page/SearchResults";
+import AddNewIssues from "./components/issues/AddNewIssues";
 
 const clientId = process.env.REACT_APP_CLIENT_ID;
 const apiURL = `https://api.github.com`;
@@ -107,9 +108,10 @@ class App extends Component {
           <div className="navBarr fixed-top">
             <SearchBox submitSearchIssues={this.submitSearchIssues} searchIssues={this.searchIssues} search={this.state.search} />
             <Pagination pageClicked={this.handlePageClick} />
+            <AddNewIssues token={this.state.token} owner={this.state.owner} repo={this.state.repo} refresh={this.githubAPI}/>
           </div>
           <div className="searchBody">
-            <SearchResults issues={this.state.issues} owner={this.state.owner} repo={this.state.repo}/>
+            <SearchResults issues={this.state.issues} owner={this.state.owner} repo={this.state.repo} />
           </div>
         </div>
       );

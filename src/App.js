@@ -4,6 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import SearchBox from "./components/tool/SearchBox";
 import Pagination from "./components/pagination/Pagination";
 import SearchResults from "./components/page/SearchResults";
+import AddNewIssues from "./components/issues/AddNewIssues";
 
 const clientId = process.env.REACT_APP_CLIENT_ID;
 const apiURL = `https://api.github.com`;
@@ -101,6 +102,7 @@ class App extends Component {
                 searchIssues={this.searchIssues}
                 search={this.state.search}
               />
+              <AddNewIssues token={this.state.token} owner={this.state.owner} repo={this.state.repo} refresh={this.githubAPI}/>
             </div>
           </div>
           <div className="searchBody">
@@ -115,15 +117,14 @@ class App extends Component {
     } else
       return (
         <div className="justify-content-center d-flex align-items-center">
-          <div class="spinner-border text-primary" role="status" />
-          <div class="spinner-border text-secondary" role="status" />
-          <div class="spinner-border text-success" role="status" />
-          <div class="spinner-border text-danger" role="status" />
-          <div class="spinner-border text-warning" role="status" />
-          <div class="spinner-border text-info" role="status" />
-          <div class="spinner-border text-light" role="status" />
-          <div class="spinner-border text-dark" role="status">
-            <span class="sr-only">Loading...</span>
+          <div className="spinner-border text-primary" role="status" />
+          <div className="spinner-border text-secondary" role="status" />
+          <div className="spinner-border text-success" role="status" />
+          <div className="spinner-border text-danger" role="status" />
+          <div className="spinner-border text-warning" role="status" />
+          <div className="spinner-border text-info" role="status" />
+          <div className="spinner-border text-dark" role="status">
+            <span className="sr-only">Loading...</span>
           </div>
         </div>
       );

@@ -4,7 +4,6 @@ import moment from "moment";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "semantic-ui-css/semantic.min.css";
 import "./IssueDetail.css";
-import ReactModal from "react-modal";
 
 // import SearchBox from "./components/tool/SearchBox";
 // import Pagination from "./components/pagination/Pagination";
@@ -239,8 +238,8 @@ class CommentModal extends React.Component {
   };
 
   handleSubmitComment = async () => {
-    if (this.state.commentValue == "") {
-      alert("Your comment cannot be blank.");
+    if (this.state.commentValue == '') {
+      alert('Your comment cannot be blank!');
       return false;
     }
 

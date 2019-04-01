@@ -55,8 +55,8 @@ export default class AddNewIssues extends Component {
 
     render() {
         return (
-            <div>
-                <Button color="danger" onClick={this.toggle}>Add Issues</Button>
+            <div className="text-center my-3">
+                <Button className="btn-submit-style" color="danger" onClick={this.toggle}>Add Issues</Button>
                 <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
                     <ModalHeader toggle={this.toggle}>Modal title</ModalHeader>
                     <ModalBody>

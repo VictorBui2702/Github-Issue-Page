@@ -50,19 +50,23 @@ class App extends Component {
     }
   }
 
-  searchIssues = (e) => {
-    this.setState({ search: e.target.value.toLowerCase() }, () => console.log(this.state.search));
-  }
+  searchIssues = e => {
+    this.setState({ search: e.target.value.toLowerCase() }, () =>
+      console.log(this.state.search)
+    );
+  };
 
-  submitSearchIssues = (event) => {
+  submitSearchIssues = event => {
     event.preventDefault();
     let searchArr = this.state.search.split("/");
-    this.setState({
-      repo: searchArr[1],
-      owner: searchArr[0],
-    }, () => this.githubAPI())
-
-  }
+    this.setState(
+      {
+        repo: searchArr[1],
+        owner: searchArr[0]
+      },
+      () => this.githubAPI()
+    );
+  };
 
   githubAPI = async () => {
     let { owner, repo, token, page } = this.state;
@@ -78,24 +82,9 @@ class App extends Component {
     );
   };
 
-  handleRepoInput = e => {
-    this.setState({ searchRepo: e.target.value }, () => {
-      console.log(this.state.searchRepo);
-    });
-  };
   componentDidMount() {
     this.githubAPI();
   }
-  handleSubmitSearch = () => {
-    this.setState(
-      {
-        repo: this.state.searchRepo
-      },
-      () => {
-        this.githubAPI();
-      }
-    );
-  };
 
   handlePageClick = data => {
     this.setState({ page: data }, () => this.githubAPI());
@@ -105,17 +94,40 @@ class App extends Component {
     if (this.state.issues.length > 0) {
       return (
         <div className="App">
-          <div className="navBarr fixed-top">
-            <SearchBox submitSearchIssues={this.submitSearchIssues} searchIssues={this.searchIssues} search={this.state.search} />
-            <Pagination pageClicked={this.handlePageClick} />
-            <AddNewIssues token={this.state.token} owner={this.state.owner} repo={this.state.repo} refresh={this.githubAPI}/>
+          <div className="navBarr fixed-top mb-5">
+            <div className="position-nav">
+              <Pagination pageClicked={this.handlePageClick} />
+              <SearchBox
+                submitSearchIssues={this.submitSearchIssues}
+                searchIssues={this.searchIssues}
+                search={this.state.search}
+              />
+              <AddNewIssues token={this.state.token} owner={this.state.owner} repo={this.state.repo} refresh={this.githubAPI}/>
+            </div>
           </div>
           <div className="searchBody">
-            <SearchResults issues={this.state.issues} owner={this.state.owner} repo={this.state.repo} />
+            <SearchResults
+              issues={this.state.issues}
+              owner={this.state.owner}
+              repo={this.state.repo}
+            />
           </div>
         </div>
       );
-    } else return <h2>Loading...!</h2>;
+    } else
+      return (
+        <div className="justify-content-center d-flex align-items-center">
+          <div className="spinner-border text-primary" role="status" />
+          <div className="spinner-border text-secondary" role="status" />
+          <div className="spinner-border text-success" role="status" />
+          <div className="spinner-border text-danger" role="status" />
+          <div className="spinner-border text-warning" role="status" />
+          <div className="spinner-border text-info" role="status" />
+          <div className="spinner-border text-dark" role="status">
+            <span className="sr-only">Loading...</span>
+          </div>
+        </div>
+      );
   }
 }
 
